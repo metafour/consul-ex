@@ -16,7 +16,7 @@ defmodule Consul.Agent.Service do
   @spec register(map, Keyword.t) :: Endpoint.response
   def register(%{"Name" => _} = body, opts \\ []) do
     build_url([@agent, @service, @register], opts)
-      |> req_put(JSX.encode!(body))
+      |> req_put(Poison.encode!(body))
   end
 
   @spec deregister(binary, Keyword.t) :: Endpoint.response

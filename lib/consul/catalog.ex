@@ -25,7 +25,7 @@ defmodule Consul.Catalog do
   @spec deregister(map, Keyword.t) :: Endpoint.response
   def deregister(%{"Datacenter" => _, "Node" => _} = body, opts \\ []) do
     build_url([@catalog, @deregister], opts)
-      |> req_put(JSX.encode!(body))
+      |> req_put(Poison.encode!(body))
   end
 
   @spec nodes(Keyword.t) :: Endpoint.response
