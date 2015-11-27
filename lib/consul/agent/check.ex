@@ -19,7 +19,7 @@ defmodule Consul.Agent.Check do
   @spec register(map, Keyword.t) :: Endpoint.response
   def register(body, opts \\ []) do
     build_url([@agent, @check, @register], opts)
-      |> req_put(JSX.encode!(body))
+      |> req_put(Poison.encode!(body))
   end
 
   @spec deregister(binary, Keyword.t) :: Endpoint.response
