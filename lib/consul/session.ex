@@ -19,7 +19,7 @@ defmodule Consul.Session do
   @spec create(map, Keyword.t) :: Endpoint.response
   def create(body, opts \\ []) do
     build_url([@session, @create], opts)
-      |> req_put(JSX.encode!(body))
+      |> req_put(Poison.encode!(body))
   end
 
   @spec create!(map, Keyword.t) :: binary | no_return
