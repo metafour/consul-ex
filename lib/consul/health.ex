@@ -27,7 +27,6 @@ defmodule Consul.Health do
   @spec service(binary, Keyword.t) :: Endpoint.response
   def service(id, opts \\ []) do
     req_get([@health, @service, id], opts)
-      |> req_get()
   end
 
   @spec state(binary, Keyword.t) :: Endpoint.response
