@@ -15,13 +15,11 @@ defmodule Consul.Agent.Service do
 
   @spec register(map, Keyword.t) :: Endpoint.response
   def register(%{"Name" => _} = body, opts \\ []) do
-    build_url([@agent, @service, @register], opts)
-      |> req_put(Poison.encode!(body))
+    req_put([@agent, @service, @register], opts, Poison.encode!(body))
   end
 
   @spec deregister(binary, Keyword.t) :: Endpoint.response
   def deregister(id, opts \\ []) do
-    build_url([@agent, @service, @deregister, id], opts)
-      |> req_delete()
+    req_delete([@agent, @service, @deregister, id], opts)
   end
 end

@@ -18,37 +18,31 @@ defmodule Consul.Agent do
 
   @spec checks(Keyword.t) :: Endpoint.response
   def checks(opts \\ []) do
-    build_url([@agent, @checks], opts)
-      |> req_get()
+    req_get([@agent, @checks], opts)
   end
 
   @spec join(binary, Keyword.t) :: Endpoint.response
   def join(address, opts \\ []) do
-    build_url([@agent, @join, address], opts)
-      |> req_get()
+    req_get([@agent, @join, address], opts)
   end
 
   @spec force_leave(binary, Keyword.t) :: Endpoint.response
   def force_leave(node, opts \\ []) do
-    build_url([@agent, @force_leave, node], opts)
-      |> req_get()
+    req_get([@agent, @force_leave, node], opts)
   end
 
   @spec members(Keyword.t) :: Endpoint.response
   def members(opts \\ []) do
-    build_url([@agent, @members], opts)
-      |> req_get()
+    req_get([@agent, @members], opts)
   end
 
   @spec self(Keyword.t) :: Endpoint.response
   def self(opts \\ []) do
-    build_url([@agent, @self], opts)
-      |> req_get()
+    req_get([@agent, @self], opts)
   end
 
   @spec services(Keyword.t) :: Endpoint.response
   def services(opts \\ []) do
-    build_url([@agent, @services], opts)
-      |> req_get()
+    req_get([@agent, @services], opts)
   end
 end

@@ -18,8 +18,7 @@ defmodule Consul.Session do
 
   @spec create(map, Keyword.t) :: Endpoint.response
   def create(body, opts \\ []) do
-    build_url([@session, @create], opts)
-      |> req_put(Poison.encode!(body))
+    req_put([@session, @create], Poison.encode!(body), opts)
   end
 
   @spec create!(map, Keyword.t) :: binary | no_return
@@ -34,31 +33,26 @@ defmodule Consul.Session do
 
   @spec destroy(binary, Keyword.t) :: Endpoint.response
   def destroy(session_id, opts \\ []) do
-    build_url([@session, @destroy, session_id], opts)
-      |> req_put("")
+    req_put([@session, @destroy, session_id], "", opts)
   end
 
   @spec info(binary, Keyword.t) :: Endpoint.response
   def info(session_id, opts \\ []) do
-    build_url([@session, @info, session_id], opts)
-      |> req_get()
+    req_get([@session, @info, session_id], opts)
   end
 
   @spec node(binary, Keyword.t) :: Endpoint.response
   def node(node_id, opts \\ []) do
-    build_url([@session, @node, node_id], opts)
-      |> req_get()
+    req_get([@session, @node, node_id], opts)
   end
 
   @spec list(Keyword.t) :: Endpoint.response
   def list(opts \\ []) do
-    build_url([@session, @list], opts)
-      |> req_get()
+    req_get([@session, @list], opts)
   end
 
   @spec renew(binary, Keyword.t) :: Endpoint.response
   def renew(session_id, opts \\ []) do
-    build_url([@session, @renew, session_id], opts)
-      |> req_put("")
+    req_put([@session, @renew, session_id], "", opts)
   end
 end

@@ -33,8 +33,7 @@ defmodule Consul.Event do
 
   @spec fire(binary, binary, Keyword.t) :: Endpoint.response
   def fire(name, payload \\ "", opts \\ []) when is_binary(payload) do
-    build_url([@event, @fire, name], opts)
-      |> req_put(payload)
+    req_put([@event, @fire, name], payload, opts)
   end
 
   @doc """
@@ -57,8 +56,7 @@ defmodule Consul.Event do
 
   @spec list(Keyword.t) :: Endpoint.response
   def list(opts \\ []) do
-    build_url([@event, @list], opts)
-      |> req_get()
+    req_get([@event, @list], opts)
   end
 
   @doc """

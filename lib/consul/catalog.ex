@@ -18,37 +18,31 @@ defmodule Consul.Catalog do
 
   @spec datacenters(Keyword.t) :: Endpoint.response
   def datacenters(opts \\ []) do
-    build_url([@catalog, @datacenters], opts)
-      |> req_get()
+    req_get([@catalog, @datacenters], opts)
   end
 
   @spec deregister(map, Keyword.t) :: Endpoint.response
   def deregister(%{"Datacenter" => _, "Node" => _} = body, opts \\ []) do
-    build_url([@catalog, @deregister], opts)
-      |> req_put(Poison.encode!(body))
+    req_put([@catalog, @deregister], Poison.encode!(body), opts)
   end
 
   @spec nodes(Keyword.t) :: Endpoint.response
   def nodes(opts \\ []) do
-    build_url([@catalog, @nodes], opts)
-      |> req_get()
+    req_get([@catalog, @nodes], opts)
   end
 
   @spec node(binary, Keyword.t) :: Endpoint.response
   def node(id, opts \\ []) do
-    build_url([@catalog, @node, id], opts)
-      |> req_get()
+    req_get([@catalog, @node, id], opts)
   end
 
   @spec services(Keyword.t) :: Endpoint.response
   def services(opts \\ []) do
-    build_url([@catalog, @services], opts)
-      |> req_get()
+    req_get([@catalog, @services], opts)
   end
 
   @spec service(binary, Keyword.t) :: Endpoint.response
   def service(name, opts \\ []) do
-    build_url([@catalog, @service, name], opts)
-      |> req_get()
+    req_get([@catalog, @service, name], opts)
   end
 end

@@ -13,9 +13,7 @@ defmodule Consul.Kv do
 
   @spec fetch(binary | [binary], Keyword.t) :: Endpoint.response
   def fetch(key, opts \\ []) do
-    List.flatten([@kv, key])
-      |> build_url(opts)
-      |> req_get()
+    List.flatten([@kv, key]) |> req_get(opts)
   end
 
   @spec fetch!(binary | [binary], Keyword.t) :: Response.t | no_return
@@ -30,9 +28,7 @@ defmodule Consul.Kv do
 
   @spec keys(binary | [binary]) :: Endpoint.response
   def keys(prefix) do
-    List.flatten([@kv, prefix])
-      |> build_url(keys: true)
-      |> req_get()
+    List.flatten([@kv, prefix]) |> req_get(keys: true)
   end
 
   @spec keys!(binary | [binary]) :: Response.t | no_return
@@ -47,7 +43,7 @@ defmodule Consul.Kv do
 
   @spec put(binary | [binary], term, Keyword.t) :: boolean
   def put(key, value, opts \\ []) do
-    case List.flatten([@kv, key]) |> build_url(opts) |> req_put(to_string(value)) do
+    case List.flatten([@kv, key]) |> req_put(to_string(value), opts) do
       {:ok, %{body: body}} ->
         body
       error ->
