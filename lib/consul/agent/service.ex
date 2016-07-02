@@ -15,7 +15,7 @@ defmodule Consul.Agent.Service do
 
   @spec register(map, Keyword.t) :: Endpoint.response
   def register(%{"Name" => _} = body, opts \\ []) do
-    req_put([@agent, @service, @register], opts, Poison.encode!(body))
+    req_put([@agent, @service, @register], Poison.encode!(body), opts)
   end
 
   @spec deregister(binary, Keyword.t) :: Endpoint.response
